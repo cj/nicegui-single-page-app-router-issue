@@ -1,0 +1,38 @@
+[tool.pdm]
+
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "CJ Lazell", email = "cjlazell@gmail.com"},
+]
+dependencies = [
+    "nicegui>=1.2.5",
+    "fastapi>=0.92.0",
+    "uvicorn>=0.20.0",
+]
+requires-python = ">=3.10"
+license = {text = "MIT"}
+[project.optional-dependencies]
+lint = [
+    "pyright>=1.1.301",
+    "black>=23.3.0",
+    "isort>=5.12.0",
+]
+
+[tool.pdm.scripts]
+dev = { cmd = "pdm run uvicorn app.main:app --log-level info --host 0.0.0.0 --port 8008 --reload --reload-delay 0.15", env_file = ".env.development" }
+
+[tool.pyright]
+include = ["app"]
+typeCheckingMode = "strict"
+reportMissingTypeStubs = true
+extraPaths = ["__pypackages__/3.10/lib"]
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
