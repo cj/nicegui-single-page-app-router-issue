@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from nicegui import Client, ui
 
-import app.ui.routes as routes
-from app.ui.routes import router
+import app.ui.routes as Routes
 
 
 def init(fastapi: FastAPI) -> None:
@@ -11,6 +10,8 @@ def init(fastapi: FastAPI) -> None:
         "/{_:path}"
     )  # all other pages will be handled by the router but must be registered to also show the SPA index page
     async def main(client: Client) -> None:  # pyright: reportUnusedFunction=false
+        routes = Routes.Routes()
+        router = routes.router
         # adding some navigation buttons to switch between the different pages
         with ui.row():
             ui.button("One", on_click=lambda: router.visit(routes.show_one)).classes("w-32")
